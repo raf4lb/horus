@@ -13,14 +13,14 @@ class ContactViewSet(viewsets.ModelViewSet):
     """
     queryset = Contact.objects.all().order_by('name')
     serializer_class = ContactSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
 
-    def get_queryset(self):
-        """
-        List the authenticated user contacts 
-        """
-        user = self.request.user
-        return Contact.objects.filter(owner=user, deleted=False)
+    # def get_queryset(self):
+    #     """
+    #     List the authenticated user contacts
+    #     """
+    #     user = self.request.user
+    #     return Contact.objects.filter(owner=user, deleted=False)
 
     def perform_create(self, serializer):
         """
