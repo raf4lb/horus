@@ -13,9 +13,6 @@ class Contact(models.Model):
         max_length=11, verbose_name='Telefone')
     deleted = models.BooleanField(default=False, verbose_name='Excluído')
 
-    class Meta:
-        unique_together = ('owner', 'telephone')
-
     def __str__(self):
         '''
         Default instance print
