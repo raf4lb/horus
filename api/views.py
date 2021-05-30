@@ -16,16 +16,14 @@ class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.order_by('name')
     serializer_class = ContactSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
-
-    class Meta:
-        ordering = ['name']
+    ordering = ['name']
 
     def get_queryset(self):
         """
         List the authenticated user contacts
         """
         user = self.request.user
-        return Contact.objects.filter(owner=user, deleted=False)
+        return Contact.objects.filter(owner=user, deleted=False).order_by('name')
 
     def create(self, request, *args, **kwargs):
         """
@@ -35,7 +33,7 @@ class ContactViewSet(viewsets.ModelViewSet):
         if telephone:
             if Contact.objects.filter(owner=request.user, telephone=telephone, deleted=False).exists():
                 return Response(status=HTTP_400_BAD_REQUEST)
-        return super().create(self, request, *args, **kwargs)
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         """

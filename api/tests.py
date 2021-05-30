@@ -9,6 +9,9 @@ from .models import Contact
 class ContactTestCase(TestCase):
 
     def setUp(self):
+        """
+        Setup for the tests
+        """
         # Create a user
         username = 'horus'
         password = 'horus12345678'
@@ -20,9 +23,9 @@ class ContactTestCase(TestCase):
         self.client = APIClient()
         self.client.login(username=username, password=password)
 
-    def test_contact_created(self):
+    def test_create_contact(self):
         """
-        Ensure a user can create a contact.
+        Test if a user can create a contact.
         """
         data = {
             'owner': self.user.pk,
@@ -35,9 +38,34 @@ class ContactTestCase(TestCase):
         self.assertEqual(Contact.objects.count(), 1)
         self.assertEqual(Contact.objects.first().telephone, '88999034444')
 
-    def test_contact_updated(self):
+    def test_update_contact_name(self):
         """
-        Ensure a user can update a contact.
+        Test if a user can update the contact name
+        """
+        # Create a contact for the user
+        contact = Contact.objects.create(
+            owner=self.user,
+            name='Rafael Albuquerque',
+            telephone='88999034444',
+        )
+
+        # Update the contact
+        new_name = 'rafael Albuquerque'
+        data = {
+            'owner': self.user.pk,
+            'name': new_name,
+            'telephone': '88999034444',
+        }
+        url = reverse('contact-detail', args=[contact.pk])
+        response = self.client.put(url, data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(Contact.objects.get(
+            pk=contact.pk).name, new_name
+        )
+
+    def test_update_contact_telephone(self):
+        """
+        Test if a user can update a contact.
         """
         # Create a contact for the user
         contact = Contact.objects.create(
@@ -60,9 +88,9 @@ class ContactTestCase(TestCase):
             pk=contact.pk).telephone, new_telephone
         )
 
-    def test_contact_deleted(self):
+    def test_delete_contact(self):
         """
-        Ensure a user can delete a contact.
+        Test if a user can delete a contact.
         """
         # Create a contact for the user
         contact = Contact.objects.create(
