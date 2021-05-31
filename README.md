@@ -13,7 +13,9 @@ API Rest para que um usuário possa gerenciar uma lista de contatos. A aplicaç�
 Criar o usuário no banco de dados com permissão para criar banco de dados e as seguintes credenciais:
 - Usuário: horus_user
 - Senha: horus_password
- 
+
+Criar um banco de dados com o nome: horus_challenge_db
+
 Caso seja necessário personalizar o acesso ao banco de dados, basta configurar os campos do dicionário DATABASES localizado em horus_challenge/settings.py.
 
 Para instalar a aplicação, basta executar os seguintes comandos na pasta do projeto:
