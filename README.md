@@ -1,15 +1,21 @@
 # Aplicação Backend do Desafio Horus
 API Rest para que um usuário possa gerenciar uma lista de contatos. A aplicação foi implementada usando Django REST framework e possui os seguintes recursos:
-- API Rest
-- Autenticação via token
-- Paginação
+- API Rest;
+- Autenticação via token;
+- Paginação.
 
 ## Requerimentos
- - Python 3.8.5
- - Django 3.2
- - PostgreSQL 13
+ - Python 3.8.5;
+ - Django 3.2;
+ - PostgreSQL 13.
 
 ## Instalação
+Criar o usuário no banco de dados com permissão para criar banco de dados e as seguintes credenciais:
+- Username: horus_user
+- Password: horus_password
+ 
+Caso precise personalizar o acesso ao banco de dados, basta configurar os campos do dicionário DATABASES localizado em horus_challenge/settings.py.
+
 Para instalar a aplicação, basta executar os seguintes comandos na pasta do projeto:
 ```
 pip install -r requirements.txt
