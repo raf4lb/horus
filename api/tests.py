@@ -27,6 +27,7 @@ class ContactTestCase(TestCase):
         """
         Test if a user can create a contact.
         """
+        # Create a contact
         data = {
             'owner': self.user.pk,
             'name': 'Rafael Albuquerque',
@@ -34,6 +35,8 @@ class ContactTestCase(TestCase):
         }
         url = reverse('contact-list')
         response = self.client.post(url, data=data, format='json')
+
+        # Verifications
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Contact.objects.count(), 1)
         self.assertEqual(Contact.objects.first().telephone, '88999034444')
@@ -49,7 +52,7 @@ class ContactTestCase(TestCase):
             telephone='88999034444',
         )
 
-        # Update the contact
+        # Update the contact name
         new_name = 'rafael Albuquerque'
         data = {
             'owner': self.user.pk,
@@ -58,6 +61,8 @@ class ContactTestCase(TestCase):
         }
         url = reverse('contact-detail', args=[contact.pk])
         response = self.client.put(url, data=data, format='json')
+
+        # Verifications
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Contact.objects.get(
             pk=contact.pk).name, new_name
@@ -65,7 +70,7 @@ class ContactTestCase(TestCase):
 
     def test_update_contact_telephone(self):
         """
-        Test if a user can update a contact.
+        Test if a user can update the contact telephone
         """
         # Create a contact for the user
         contact = Contact.objects.create(
@@ -74,7 +79,7 @@ class ContactTestCase(TestCase):
             telephone='88999034444',
         )
 
-        # Update the contact
+        # Update the contact telephone
         new_telephone = '88999034443'
         data = {
             'owner': self.user.pk,
@@ -83,6 +88,8 @@ class ContactTestCase(TestCase):
         }
         url = reverse('contact-detail', args=[contact.pk])
         response = self.client.put(url, data=data, format='json')
+
+        # Verifications
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Contact.objects.get(
             pk=contact.pk).telephone, new_telephone
@@ -98,8 +105,12 @@ class ContactTestCase(TestCase):
             name='Rafael Albuquerque',
             telephone='88999034444',
         )
+
+        # Delete the contact
         url = reverse('contact-detail', args=[contact.pk])
         response = self.client.delete(url)
+
+        # Verifications
         self.assertEqual(response.status_code, 204)
         self.assertEqual(
             Contact.objects.filter(pk=contact.pk, deleted=True).exists(),
