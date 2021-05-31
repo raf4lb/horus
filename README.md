@@ -11,10 +11,10 @@ API Rest para que um usuário possa gerenciar uma lista de contatos. A aplicaç�
 
 ## Instalação
 Criar o usuário no banco de dados com permissão para criar banco de dados e as seguintes credenciais:
-- Username: horus_user
-- Password: horus_password
+- Usuário: horus_user
+- Senha: horus_password
  
-Caso precise personalizar o acesso ao banco de dados, basta configurar os campos do dicionário DATABASES localizado em horus_challenge/settings.py.
+Caso seja necessário personalizar o acesso ao banco de dados, basta configurar os campos do dicionário DATABASES localizado em horus_challenge/settings.py.
 
 Para instalar a aplicação, basta executar os seguintes comandos na pasta do projeto:
 ```
@@ -22,11 +22,18 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py loaddata db.json
 ```
+Será criado um usuário com as seguintes credenciais:
+- Usuário: horus
+- Senha: horus12345678
+
 ## Rodando
 Para rodar a aplicação, basta e executar o seguinte comando na pasta do projeto:
 ```
 python manage.py runserver
 ```
+
+A api estará acessível no endereço http://127.0.0.1:8000
+
 ## Testando
 Certifique-se de que o usuário horus_user tenha permissão para criar bancos de dados. Para testar a aplicação,  basta e executar o seguinte comando na pasta do projeto:
 ```
