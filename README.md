@@ -37,7 +37,7 @@ python manage.py runserver
 A api estará acessível no endereço http://127.0.0.1:8000
 
 ## Testando
-Certifique-se de que o usuário horus_user tenha permissão para criar bancos de dados. Para testar a aplicação,  basta e executar o seguinte comando na pasta do projeto:
+Certifique-se de que o usuário do banco de dados horus_user tenha permissão para criar bancos de dados. Para testar a aplicação, basta executar o seguinte comando na pasta do projeto:
 ```
 python manage.py test
 ```
