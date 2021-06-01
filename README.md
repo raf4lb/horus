@@ -29,7 +29,7 @@ Será criado um usuário com as seguintes credenciais:
 - Senha: horus12345678
 
 ## Rodando
-Para rodar a aplicação, basta e executar o seguinte comando na pasta do projeto:
+Para rodar a aplicação, basta executar o seguinte comando na pasta do projeto:
 ```
 python manage.py runserver
 ```
@@ -48,7 +48,7 @@ As rotinas de teste estão localizadas no arquivo api/tests.py. Os seguintes tes
 - Excluir um contato;
 
 ## Endpoints
-Consumo com autenticação via token. Adicionar ao header a chave "Authorization" com o valor "Token <token>".
+O consumo da api é com autenticação via token. Adicionar ao header a chave "Authorization" com o valor "Token <token>".
 A api possui os seguntes endpoints:
 ### Acessar token de um usuário
 - Endpoint: /api-auth/token/
