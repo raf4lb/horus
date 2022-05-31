@@ -1,94 +1,94 @@
-# Aplicação Backend do Desafio Horus
-API Rest para que um usuário possa gerenciar uma lista de contatos. A aplicação foi implementada usando Django REST framework e possui os seguintes recursos:
-- API Rest;
-- Autenticação via token;
-- Paginação.
+# Contacts Management API
+Rest API for managing contacts. The application was implemented using Django REST framework and has the following features:
+- Rest API;
+- Token Authentication;
+- Pagination.
 
-## Requerimentos
+## Requirements
  - Python 3.8.5;
  - Django 3.2;
  - PostgreSQL 13.
 
-## Instalação
-Criar o usuário no banco de dados com permissão para criar banco de dados e as seguintes credenciais:
-- Usuário: horus_user
-- Senha: horus_password
+## Installing
+Create a user in the database with database creation permission and with the following credentials:
+- Username: horus_user
+- Password: horus_password
 
-Criar um banco de dados com o nome: horus_challenge_db
+Create a database named "horus_challenge_db".
 
-Caso seja necessário personalizar o acesso ao banco de dados, basta configurar os campos do dicionário DATABASES localizado em horus_challenge/settings.py.
+If you need to customize database access, update the variable named DATABASES located in horus_challenge/settings.py.
 
-Para instalar a aplicação, basta executar os seguintes comandos na pasta do projeto:
+To install the application, run the following commands in the project root folder:
 ```
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py loaddata db.json
 ```
-Será criado um usuário com as seguintes credenciais:
-- Usuário: horus
-- Senha: horus12345678
+A user with the following credentials will be created:
+- Username: horus
+- Password: horus12345678
 
-## Rodando
-Para rodar a aplicação, basta executar o seguinte comando na pasta do projeto:
+## Running
+To run the application, execute the following commands in the project root folder:
 ```
 python manage.py runserver
 ```
 
-A api estará acessível no endereço http://127.0.0.1:8000
+The api will be available at http://127.0.0.1:8000
 
-## Testando
-Certifique-se de que o usuário do banco de dados horus_user tenha permissão para criar bancos de dados. Para testar a aplicação, basta executar o seguinte comando na pasta do projeto:
+## Testing
+Make sure that the database user has permission to create databases. To test the application, run the following commands in the project root folder:
 ```
 python manage.py test
 ```
-As rotinas de teste estão localizadas no arquivo api/tests.py. Os seguintes testes serão realizados:
-- Adicionar um contato;
-- Editar o nome de um contato;
-- Editar o telefone de um contato;
-- Excluir um contato;
+The test routines are located in the api/tests.py file. The following tests will be performed:
+- Add a contact;
+- Update the contact name;
+- Update the contact phone number;
+- Delete a contact;
 
 ## Endpoints
-O consumo da api é com autenticação via token. Adicionar ao header a chave "Authorization" com o valor "Token <token>".
-A api possui os seguntes endpoints:
-### Acessar token de um usuário
+The API must be accessed via token authentication. Add the key "Authorization" with the value "Token <token>" to the request's header.
+The api has the following endpoints:
+### Get a user's token
 - Endpoint: /api-auth/token/
-- Método: POST
-- Exemplo:
+- Method: POST
+- Example:
 ```
 curl -X POST -F 'username=horus' -F 'password=horus12345678' http://127.0.0.1:8000/api-auth/token/
 ```
-### Acessar informações do usuário autenticado
+### Get authenticated user's information
 - Endpoint: /api-auth/user-info/
-- Método: GET
-- Exemplo:
+- Method: GET
+- Example:
 ```
 curl -X GET -H 'Authorization: Token eb55c58b680a96877b31b0156a7f07cc849c91a9' http://127.0.0.1:8000/api-auth/user-info/
 ```
-### Listagem de contatos de um usuário
+### List user's contacts
 - Endpoint: /api-v1/contacts/
-- Método: GET
-- Exemplo:
+- Method: GET
+- Example:
 ```
 curl -X GET -H 'Authorization: Token eb55c58b680a96877b31b0156a7f07cc849c91a9' http://127.0.0.1:8000/api-v1/contacts/
 ```
-### Criação de um contato:
+### Create a contact:
 - Endpoint: /api-v1/contacts/
-- Método: POST
-- Exemplo:
+- Method: POST
+- Example:
 ```
 curl -X POST -F 'owner=2' -F 'name=Rafael Albuquerque' -F 'telephone=88999034444' -H 'Authorization: Token eb55c58b680a96877b31b0156a7f07cc849c91a9' http://127.0.0.1:8000/api-v1/contacts/
 ```
-### Atualização de contato
+### Update a contact
 - Endpoint: /api-v1/contacts/<int:contato_id>/
-- Método: PUT
-- Exemplo:
+- Method: PUT
+- Example:
 ```
 curl -X PUT -F 'owner=2' -F 'name=Rafael Moreira' -F 'telephone=88999034443' -H 'Authorization: Token eb55c58b680a96877b31b0156a7f07cc849c91a9' http://127.0.0.1:8000/api-v1/contacts/1/
 ```
-### Exclusão de contato
+### Delete a contact
 - Endpoint: /api-v1/contacts/<int:contato_id>/
-- Método: DELETE
-- Exemplo:
+- Method: DELETE
+- Example:
 ```
 curl -X DELETE -H 'Authorization: Token eb55c58b680a96877b31b0156a7f07cc849c91a9' http://127.0.0.1:8000/api-v1/contacts/1/
 ```
